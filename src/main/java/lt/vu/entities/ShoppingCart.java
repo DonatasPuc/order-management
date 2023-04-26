@@ -1,4 +1,4 @@
-package entities;
+package lt.vu.entities;
 
 import lombok.Getter;
 import lombok.Setter;

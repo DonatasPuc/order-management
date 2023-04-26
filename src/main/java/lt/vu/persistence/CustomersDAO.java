@@ -1,6 +1,6 @@
 package lt.vu.persistence;
 
-import entities.Customer;
+import lt.vu.entities.Customer;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;

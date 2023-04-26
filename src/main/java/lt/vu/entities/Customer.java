@@ -1,4 +1,4 @@
-package entities;
+package lt.vu.entities;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -29,6 +29,7 @@ public class Customer implements Serializable {
     private String name;
     private Date birthDate;
     private String address;
+    private String email;
 
     @OneToMany(mappedBy = "customer")
     private List<ShoppingCart> shoppingCarts = new ArrayList<>();

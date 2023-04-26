@@ -1,6 +1,6 @@
 package lt.vu.persistence;
 
-import entities.ShoppingCart;
+import lt.vu.entities.ShoppingCart;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;

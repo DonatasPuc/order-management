@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+    <title>Customers myBatis</title>
+</h:head>
+<h:body>
+    <div>
+        <h1>Customers</h1>
+        <a href="products.xhtml">Product List</a>
+    </div>
+    <br/>
+
+    <h:form>
+        <h3>Add new Customer</h3>
+        <p>Name:
+            <h:inputText value="#{customersMyBatis.customerToCreate.name}" required="true"/>
+        </p>
+        <p>Email:
+            <h:inputText value="#{customersMyBatis.customerToCreate.email}" required="true"/>
+        </p>
+        <p>Address:
+            <h:inputText value="#{customersMyBatis.customerToCreate.address}" required="true"/>
+        </p>
+        <h:commandButton value="Add" action="#{customersMyBatis.createCustomer}"/>
+    </h:form>
+    <br/>
+
+    <h3>All customers</h3>
+    <ui:repeat value="#{customers.allCustomers}" var="customer">
+        <div>
+            <p>Name: <h:link outcome="customers?customerId=#{customer.id}">#{customer.name}</h:link></p>
+            <p>Email: #{customer.email}</p>
+        </div>
+    </ui:repeat>
+</h:body>
+</html>

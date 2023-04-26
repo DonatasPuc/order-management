@@ -1,4 +1,4 @@
-package entities;
+package lt.vu.entities;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -21,6 +21,7 @@ public class Product implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String name;
 
     @ManyToMany
     private List<ShoppingCart> shoppingCarts;
