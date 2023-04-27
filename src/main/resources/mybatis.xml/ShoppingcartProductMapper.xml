@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lt.vu.mybatis.dao.ShoppingcartProductMapper">
+    <resultMap id="ShoppingcartResultMap" type="lt.vu.mybatis.model.Shoppingcart">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <collection javaType="ArrayList" property="users" resultMap="ProductResultMap" />
+    </resultMap>
+
+    <resultMap id="ProductResultMap" type="lt.vu.mybatis.model.Product">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <collection javaType="ArrayList" property="users" resultMap="ShoppingcartResultMap" />
+    </resultMap>
+
+    <insert id="addProduct">
+        INSERT INTO SHOPPINGCART_PRODUCT (SHOPPINGCARTS_ID, PRODUCTS_ID)
+        VALUES (#{shoppingCartId, jdbcType=INTEGER}, #{productId, jdbcType=INTEGER});
+    </insert>
+    <delete id="deleteProduct" >
+        DELETE FROM SHOPPINGCART_PRODUCT
+        WHERE PRODUCTS_ID=#{productId}
+          AND SHOPPINGCARTS_ID=#{shoppingCartId}
+    </delete>
+
+    <select id="getProducts" resultMap="ShoppingcartResultMap">
+        SELECT P.id   AS id,
+               P.name AS name
+        FROM PRODUCT AS P
+                 LEFT JOIN SHOPPINGCART_PRODUCT AS SP ON P.id = SP.PRODUCTS_ID
+                 LEFT JOIN SHOPPINGCART AS S ON S.id = SP.SHOPPINGCARTS_ID
+        WHERE P.id = #{id,jdbcType=INTEGER}
+    </select>
+
+</mapper>
