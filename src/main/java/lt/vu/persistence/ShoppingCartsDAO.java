@@ -21,7 +21,7 @@ public class ShoppingCartsDAO {
         return em.find(ShoppingCart.class, id);
     }
 
-    public void persist(ShoppingCart shoppingCart){
+    public void persist(ShoppingCart shoppingCart) {
         this.em.persist(shoppingCart);
     }
 }

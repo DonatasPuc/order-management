@@ -26,6 +26,5 @@
         <table schema="public" tableName="product">
             <generatedKey column="id" identity="true" sqlStatement="JDBC" />
         </table>
-        <table schema="public" tableName="product_shoppingcart"/>
     </context>
 </generatorConfiguration>

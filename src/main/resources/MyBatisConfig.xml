@@ -6,7 +6,6 @@
     <typeAliases>
         <typeAlias type="lt.vu.mybatis.model.Customer" alias="Customer"/>
         <typeAlias type="lt.vu.mybatis.model.Shoppingcart" alias="Shoppingcart"/>
-        <typeAlias type="lt.vu.mybatis.model.ProductShoppingcart" alias="ProductShoppingcart"/>
         <typeAlias type="lt.vu.mybatis.model.Product" alias="Product"/>
     </typeAliases>
     <environments default="development">
@@ -21,6 +20,5 @@
         <mapper resource="mybatis.xml/CustomerMapper.xml"/>
         <mapper resource="mybatis.xml/ShoppingcartMapper.xml"/>
         <mapper resource="mybatis.xml/ProductMapper.xml"/>
-        <mapper resource="mybatis.xml/ProductShoppingcartMapper.xml"/>
     </mappers>
 </configuration>

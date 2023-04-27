@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -23,6 +24,6 @@ public class Product implements Serializable {
     private Long id;
     private String name;
 
-    @ManyToMany
-    private List<ShoppingCart> shoppingCarts;
+    @ManyToMany(mappedBy = "products")
+    private List<ShoppingCart> shoppingCarts = new ArrayList<>();
 }

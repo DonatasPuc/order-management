@@ -16,6 +16,20 @@
     </div>
     <br/>
 
+    <h:form>
+        <h:commandButton value="Create order"
+                         action="#{shoppingCarts.createShoppingCart}"/>
+    </h:form>
+
+    <h3>Customer orders</h3>
+    <ui:repeat value="#{shoppingCart.allShoppingCarts}" var="shoppingCart">
+        <div>
+            <p>
+                <h:link outcome="shoppingCart?customerId=#{shoppingCart.customer.id}">Order</h:link>
+            </p>
+        </div>
+    </ui:repeat>
+
     <div>
         <a href="index.xhtml">Back to Main page</a>
     </div>
