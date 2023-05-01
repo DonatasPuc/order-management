@@ -23,6 +23,7 @@ public class Product implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
+    private String description;
 
     @ManyToMany(mappedBy = "products")
     private List<ShoppingCart> shoppingCarts = new ArrayList<>();

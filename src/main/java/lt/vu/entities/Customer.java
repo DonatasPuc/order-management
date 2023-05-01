@@ -27,7 +27,6 @@ public class Customer implements Serializable {
 
     @Size(max=50)
     private String name;
-    private Date birthDate;
     private String address;
     private String email;
 
