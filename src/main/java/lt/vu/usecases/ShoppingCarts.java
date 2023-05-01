@@ -3,8 +3,10 @@ package lt.vu.usecases;
 import lombok.Getter;
 import lombok.Setter;
 import lt.vu.entities.Customer;
+import lt.vu.entities.Product;
 import lt.vu.entities.ShoppingCart;
 import lt.vu.persistence.CustomersDAO;
+import lt.vu.persistence.ProductsDAO;
 import lt.vu.persistence.ShoppingCartsDAO;
 
 import javax.annotation.PostConstruct;
@@ -15,6 +17,7 @@ import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Model
 public class ShoppingCarts {
@@ -25,17 +28,23 @@ public class ShoppingCarts {
     @Inject
     private CustomersDAO customersDAO;
 
-    @Getter @Setter
+    @Inject
+    private ProductsDAO productsDAO;
+
+    @Getter
+    @Setter
     private Customer customer;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private ShoppingCart shoppingCartToCreate = new ShoppingCart();
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private List<ShoppingCart> customerShoppingCarts;
 
     @PostConstruct
-    public void init(){
+    public void init() {
         Map<String, String> requestParameters =
                 FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         int customerId = Integer.parseInt(requestParameters.get("customerId"));
@@ -45,7 +54,7 @@ public class ShoppingCarts {
     }
 
     @Transactional
-    public String createShoppingCart(){
+    public String createShoppingCart() {
         shoppingCartToCreate.setCustomer(customer);
         shoppingCartToCreate.setCreateDate(new Date());
         shoppingCartToCreate.setNumber(customerShoppingCartCount() + 1);
@@ -54,7 +63,13 @@ public class ShoppingCarts {
         return "/customers.xhtml?faces-redirect=true&customerId=" + customer.getId();
     }
 
-    public int customerShoppingCartCount(){
+    public List<Product> getShoppingCartProducts(int shoppingCartId) {
+        return productsDAO.loadAll().stream()
+                .filter(product -> product.getShoppingCarts().contains(shoppingCartsDAO.findOne(shoppingCartId)))
+                .collect(Collectors.toList());
+    }
+
+    public int customerShoppingCartCount() {
         return customerShoppingCarts.size();
     }
 }

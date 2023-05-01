@@ -1,5 +1,6 @@
 package lt.vu.entities;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,6 +13,7 @@ import java.util.List;
 @Table(name = "PRODUCT")
 @Getter
 @Setter
+@EqualsAndHashCode
 @NamedQueries({
         @NamedQuery(name = "Products.findAll", query = "select p from Product as p")
 })

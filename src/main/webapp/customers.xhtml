@@ -28,6 +28,13 @@
             <p>
                 <h:link outcome="shoppingcart.xhtml?customerId=#{cart.customer.id}">Order #{cart.number}</h:link>
             </p>
+            <ul>
+                <ui:repeat value="#{shoppingCarts.getShoppingCartProducts(cart.id)}" var="product">
+                    <li>
+                        #{product.name}
+                    </li>
+                </ui:repeat>
+            </ul>
         </div>
     </ui:repeat>
 
