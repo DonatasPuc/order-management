@@ -9,9 +9,11 @@ import lt.vu.persistence.ShoppingCartsDAO;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Map;
 
 @Model
 public class ShoppingCarts {
@@ -29,21 +31,22 @@ public class ShoppingCarts {
     private ShoppingCart shoppingCartToCreate = new ShoppingCart();
 
     @Getter @Setter
-    private List<ShoppingCart> allShoppingCarts;
+    private List<ShoppingCart> customerShoppingCarts;
 
     @PostConstruct
     public void init(){
-        loadShoppingCarts();
-    }
+        Map<String, String> requestParameters =
+                FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+        int customerId = Integer.parseInt(requestParameters.get("customerId"));
 
-    public void loadShoppingCarts() {
-        this.allShoppingCarts = shoppingCartsDAO.loadAll();
+        customer = customersDAO.findOne(customerId);
+        customerShoppingCarts = shoppingCartsDAO.findByCustomer(customer);
     }
 
     @Transactional
     public String createShoppingCart(){
         this.shoppingCartToCreate.setCustomer(customer);
         this.shoppingCartsDAO.persist(shoppingCartToCreate);
-        return "/customers?faces-redirect=true";
+        return "/customers.xhtml?faces-redirect=true&customerId=" + customer.getId();
     }
 }

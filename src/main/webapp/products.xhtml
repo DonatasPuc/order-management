@@ -10,15 +10,13 @@
     <h1>Products</h1>
 
     <h:form>
-        <h3>Add new Product</h3>
-        <p>Name:
+        <h3>Add new product:</h3>
+        <p>
             <h:inputText value="#{products.productToCreate.name}" required="true"/>
+            <h:commandButton value="Add" action="#{products.createProduct}"/>
         </p>
-        <h:commandButton value="Add" action="#{products.createProduct}"/>
     </h:form>
     <br/>
-
-    <h:form><h:commandButton value="Create order" action="#{shoppingCarts.createCustomer}"/></h:form>
 
     <h3>All products</h3>
     <ui:repeat value="#{products.allProducts}" var="product">

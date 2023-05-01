@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <h:head>
     <title>Customer Details myBatis</title>
@@ -16,20 +17,21 @@
     </div>
     <br/>
 
-    <h:form>
-        <h:commandButton value="Create order"
-                         action="#{shoppingCarts.createShoppingCart}"/>
-    </h:form>
-
     <h3>Customer orders</h3>
-    <ui:repeat value="#{shoppingCart.allShoppingCarts}" var="shoppingCart">
+    <h:form>
+        <h:commandButton value="Create order" action="#{shoppingCarts.createShoppingCart}">
+            <f:param name="customerId" value="#{shoppingCarts.customer.id}"/>
+        </h:commandButton>
+    </h:form>
+    <ui:repeat value="#{shoppingCarts.customerShoppingCarts}" var="cart">
         <div>
             <p>
-                <h:link outcome="shoppingCart?customerId=#{shoppingCart.customer.id}">Order</h:link>
+                <h:link outcome="shoppingcart.xhtml?customerId=#{cart.customer.id}">Order #{cart.id}</h:link>
             </p>
         </div>
     </ui:repeat>
 
+    <br/>
     <div>
         <a href="index.xhtml">Back to Main page</a>
     </div>

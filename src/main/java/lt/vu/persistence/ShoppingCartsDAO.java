@@ -1,5 +1,6 @@
 package lt.vu.persistence;
 
+import lt.vu.entities.Customer;
 import lt.vu.entities.ShoppingCart;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -19,6 +20,10 @@ public class ShoppingCartsDAO {
 
     public ShoppingCart findOne(int id) {
         return em.find(ShoppingCart.class, id);
+    }
+
+    public List<ShoppingCart> findByCustomer(Customer customer) {
+        return em.createNamedQuery("ShoppingCarts.findByCustomer", ShoppingCart.class).setParameter("customer", customer).getResultList();
     }
 
     public void persist(ShoppingCart shoppingCart) {

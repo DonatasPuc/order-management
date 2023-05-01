@@ -14,7 +14,8 @@ import java.util.List;
 @Setter
 @Table(name = "SHOPPINGCART")
 @NamedQueries({
-        @NamedQuery(name = "ShoppingCarts.findAll", query = "select c from ShoppingCart as c")
+        @NamedQuery(name = "ShoppingCarts.findAll", query = "select c from ShoppingCart as c"),
+        @NamedQuery(name = "ShoppingCarts.findByCustomer", query = "select c from ShoppingCart as c where c.customer = :customer")
 })
 public class ShoppingCart implements Serializable {
 
