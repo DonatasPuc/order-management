@@ -13,7 +13,7 @@
         <p>Name: #{customerDetailsMyBatis.customer.name}</p>
         <p>Email: #{customerDetailsMyBatis.customer.email}</p>
         <p>Address: #{customerDetailsMyBatis.customer.address}</p>
-        <p>Number of orders placed:</p>
+        <p>Number of orders placed: #{shoppingCarts.customerShoppingCartCount()}</p>
     </div>
     <br/>
 
@@ -26,7 +26,7 @@
     <ui:repeat value="#{shoppingCarts.customerShoppingCarts}" var="cart">
         <div>
             <p>
-                <h:link outcome="shoppingcart.xhtml?customerId=#{cart.customer.id}">Order #{cart.id}</h:link>
+                <h:link outcome="shoppingcart.xhtml?customerId=#{cart.customer.id}">Order #{cart.number}</h:link>
             </p>
         </div>
     </ui:repeat>

@@ -12,6 +12,7 @@ import javax.enterprise.inject.Model;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -45,8 +46,15 @@ public class ShoppingCarts {
 
     @Transactional
     public String createShoppingCart(){
-        this.shoppingCartToCreate.setCustomer(customer);
-        this.shoppingCartsDAO.persist(shoppingCartToCreate);
+        shoppingCartToCreate.setCustomer(customer);
+        shoppingCartToCreate.setCreateDate(new Date());
+        shoppingCartToCreate.setNumber(customerShoppingCartCount() + 1);
+
+        shoppingCartsDAO.persist(shoppingCartToCreate);
         return "/customers.xhtml?faces-redirect=true&customerId=" + customer.getId();
+    }
+
+    public int customerShoppingCartCount(){
+        return customerShoppingCarts.size();
     }
 }
