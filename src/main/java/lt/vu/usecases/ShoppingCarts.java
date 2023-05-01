@@ -14,9 +14,7 @@ import javax.enterprise.inject.Model;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Model
@@ -57,9 +55,15 @@ public class ShoppingCarts {
     public String createShoppingCart() {
         shoppingCartToCreate.setCustomer(customer);
         shoppingCartToCreate.setCreateDate(new Date());
-        shoppingCartToCreate.setNumber(customerShoppingCartCount() + 1);
+        shoppingCartToCreate.setNumber(customerShoppingCartNumber());
 
         shoppingCartsDAO.persist(shoppingCartToCreate);
+        return "/customers.xhtml?faces-redirect=true&customerId=" + customer.getId();
+    }
+
+    @Transactional
+    public String removeShoppingCart(int shoppingCartId) {
+        shoppingCartsDAO.remove(shoppingCartsDAO.findOne(shoppingCartId));
         return "/customers.xhtml?faces-redirect=true&customerId=" + customer.getId();
     }
 
@@ -67,6 +71,14 @@ public class ShoppingCarts {
         return productsDAO.loadAll().stream()
                 .filter(product -> product.getShoppingCarts().contains(shoppingCartsDAO.findOne(shoppingCartId)))
                 .collect(Collectors.toList());
+    }
+
+    private int customerShoppingCartNumber() {
+        return customerShoppingCarts
+                .stream()
+                .map(ShoppingCart::getNumber)
+                .max(Comparator.naturalOrder())
+                .orElse(0) + 1;
     }
 
     public int customerShoppingCartCount() {

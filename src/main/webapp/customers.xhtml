@@ -8,6 +8,10 @@
     <title>Customer Details myBatis</title>
 </h:head>
 <h:body>
+    <div>
+        <a href="index.xhtml">Back to Main page</a>
+    </div>
+    <br/>
     <h3>Customer Details</h3>
     <div>
         <p>Name: #{customerDetailsMyBatis.customer.name}</p>
@@ -15,7 +19,6 @@
         <p>Address: #{customerDetailsMyBatis.customer.address}</p>
         <p>Number of orders placed: #{shoppingCarts.customerShoppingCartCount()}</p>
     </div>
-    <br/>
 
     <h3>Customer orders</h3>
     <h:form>
@@ -26,7 +29,9 @@
     <ui:repeat value="#{shoppingCarts.customerShoppingCarts}" var="cart">
         <div>
             <p>
-                <h:link outcome="shoppingcart.xhtml?customerId=#{cart.customer.id}">Order #{cart.number}</h:link>
+                <h:link outcome="shoppingcart.xhtml?customerId=#{cart.customer.id}&amp;shoppingCartId=#{cart.id}">
+                    Order #{cart.number}
+                </h:link>
             </p>
             <ul>
                 <ui:repeat value="#{shoppingCarts.getShoppingCartProducts(cart.id)}" var="product">
@@ -37,11 +42,5 @@
             </ul>
         </div>
     </ui:repeat>
-
-    <br/>
-    <div>
-        <a href="index.xhtml">Back to Main page</a>
-    </div>
-    <br/>
 </h:body>
 </html>

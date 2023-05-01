@@ -7,8 +7,11 @@
     <title>Products myBatis</title>
 </h:head>
 <h:body>
+    <div>
+        <a href="index.xhtml">Back to Main page</a>
+    </div>
+    <br/>
     <h1>Products</h1>
-
     <h:form>
         <h3>Add new product:</h3>
         <p>
@@ -17,17 +20,11 @@
         </p>
     </h:form>
     <br/>
-
     <h3>All products</h3>
     <ui:repeat value="#{products.allProducts}" var="product">
         <div>
             <p>Name: #{product.name}</p>
         </div>
     </ui:repeat>
-
-    <div>
-        <a href="index.xhtml">Back to Main page</a>
-    </div>
-    <br />
 </h:body>
 </html>

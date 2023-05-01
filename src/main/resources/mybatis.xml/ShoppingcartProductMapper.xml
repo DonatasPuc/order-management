@@ -3,14 +3,14 @@
 <mapper namespace="lt.vu.mybatis.dao.ShoppingcartProductMapper">
     <resultMap id="ShoppingcartResultMap" type="lt.vu.mybatis.model.Shoppingcart">
         <id column="id" jdbcType="INTEGER" property="id"/>
-        <result column="name" jdbcType="VARCHAR" property="name"/>
-        <collection javaType="ArrayList" property="users" resultMap="ProductResultMap" />
+<!--        <result column="name" jdbcType="VARCHAR" property="name"/>-->
+        <collection javaType="ArrayList" property="products" resultMap="ProductResultMap" />
     </resultMap>
 
     <resultMap id="ProductResultMap" type="lt.vu.mybatis.model.Product">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
-        <collection javaType="ArrayList" property="users" resultMap="ShoppingcartResultMap" />
+<!--        <collection javaType="ArrayList" property="shoppingCarts" resultMap="ShoppingcartResultMap" />-->
     </resultMap>
 
     <insert id="addProduct">
@@ -23,13 +23,13 @@
           AND SHOPPINGCARTS_ID=#{shoppingCartId}
     </delete>
 
-    <select id="getProducts" resultMap="ShoppingcartResultMap">
+    <select id="getProducts" resultMap="ProductResultMap">
         SELECT P.id   AS id,
                P.name AS name
         FROM PRODUCT AS P
                  LEFT JOIN SHOPPINGCART_PRODUCT AS SP ON P.id = SP.PRODUCTS_ID
                  LEFT JOIN SHOPPINGCART AS S ON S.id = SP.SHOPPINGCARTS_ID
-        WHERE P.id = #{id,jdbcType=INTEGER}
+        WHERE S.id = #{id,jdbcType=INTEGER}
     </select>
 
 </mapper>

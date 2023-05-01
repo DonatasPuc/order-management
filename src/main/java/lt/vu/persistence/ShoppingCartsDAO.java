@@ -29,4 +29,6 @@ public class ShoppingCartsDAO {
     public void persist(ShoppingCart shoppingCart) {
         this.em.persist(shoppingCart);
     }
+
+    public void remove(ShoppingCart shoppingCart) { this.em.remove(shoppingCart); }
 }
