@@ -14,16 +14,19 @@
     <h1>Products</h1>
     <h:form>
         <h3>Add new product:</h3>
-        <p>
+        <p> Name:
             <h:inputText value="#{products.productToCreate.name}" required="true"/>
-            <h:commandButton value="Add" action="#{products.createProduct}"/>
         </p>
+        <p> Description:
+            <h:inputText value="#{products.productToCreate.description}" required="true"/>
+        </p>
+        <h:commandButton value="Add" action="#{products.createProduct}"/>
     </h:form>
     <br/>
     <h3>All products</h3>
     <ui:repeat value="#{products.allProducts}" var="product">
         <div>
-            <p>Name: #{product.name}</p>
+            <p>Name: #{product.name}. Description: #{product.description}</p>
         </div>
     </ui:repeat>
 </h:body>
