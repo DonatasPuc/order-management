@@ -3,6 +3,7 @@ package lt.vu.rest;
 import lombok.Getter;
 import lombok.Setter;
 import lt.vu.entities.Customer;
+import lt.vu.interceptors.LoggedInvocation;
 import lt.vu.persistence.CustomersDAO;
 import lt.vu.rest.contracts.CustomerDto;
 
@@ -14,6 +15,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @ApplicationScoped
+@LoggedInvocation
 @Path("/customers")
 public class CustomersController {
 
