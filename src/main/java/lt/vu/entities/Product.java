@@ -26,6 +26,11 @@ public class Product implements Serializable {
     private Integer id;
     private String name;
     private String description;
+    private Integer discount = 0;
+
+    @Version
+    @Column(name = "OPT_LOCK_VERSION")
+    private Integer version;
 
     @ManyToMany(mappedBy = "products")
     private List<ShoppingCart> shoppingCarts = new ArrayList<>();
