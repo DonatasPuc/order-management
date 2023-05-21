@@ -11,4 +11,6 @@ public interface ShoppingcartProductMapper {
     int deleteProduct(@Param("shoppingCartId") Integer shoppingCartId, @Param("productId") Integer productId);
     int addProduct(@Param("shoppingCartId") Integer shoppingCartId, @Param("productId") Integer productId);
     List<Product> getProducts(Integer shoppingCartId);
+
+    int getProductCount(Integer shoppingCartId);
 }

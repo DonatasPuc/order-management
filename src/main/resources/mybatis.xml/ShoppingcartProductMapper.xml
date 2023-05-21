@@ -32,4 +32,12 @@
         WHERE S.id = #{id,jdbcType=INTEGER}
     </select>
 
+    <select id="getProductCount" parameterType="int" resultType="int">
+        SELECT COUNT(*)
+        FROM PRODUCT AS P
+                 LEFT JOIN SHOPPINGCART_PRODUCT AS SP ON P.id = SP.PRODUCTS_ID
+                 LEFT JOIN SHOPPINGCART AS S ON S.id = SP.SHOPPINGCARTS_ID
+        WHERE S.id = #{id,jdbcType=INTEGER}
+    </select>
+
 </mapper>

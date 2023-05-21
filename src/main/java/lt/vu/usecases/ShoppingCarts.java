@@ -5,6 +5,7 @@ import lombok.Setter;
 import lt.vu.entities.Customer;
 import lt.vu.entities.Product;
 import lt.vu.entities.ShoppingCart;
+import lt.vu.mybatis.dao.ShoppingcartProductMapper;
 import lt.vu.persistence.CustomersDAO;
 import lt.vu.persistence.ProductsDAO;
 import lt.vu.persistence.ShoppingCartsDAO;
@@ -19,6 +20,9 @@ import java.util.stream.Collectors;
 
 @Model
 public class ShoppingCarts {
+
+    @Inject
+    private ShoppingcartProductMapper shoppingcartProductMapper;
 
     @Inject
     private ShoppingCartsDAO shoppingCartsDAO;
@@ -83,5 +87,9 @@ public class ShoppingCarts {
 
     public int customerShoppingCartCount() {
         return customerShoppingCarts.size();
+    }
+
+    public int shoppingCartProductCount(Integer shoppingCartId) {
+        return shoppingcartProductMapper.getProductCount(shoppingCartId);
     }
 }
