@@ -1,7 +1,7 @@
 package lt.vu.usecases;
 
 import lt.vu.entities.Product;
-import lt.vu.interceptors.LoggedInvocation;
+import lt.vu.log.LoggedInvocation;
 import lt.vu.services.ProductDiscountGenerator;
 
 import javax.enterprise.context.SessionScoped;

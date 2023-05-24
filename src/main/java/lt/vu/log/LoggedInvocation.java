@@ -1,4 +1,4 @@
-package lt.vu.interceptors;
+package lt.vu.log;
 
 import javax.interceptor.InterceptorBinding;
 import java.lang.annotation.*;
