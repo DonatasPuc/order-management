@@ -9,6 +9,7 @@ import lt.vu.rest.contracts.CustomerDto;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.persistence.OptimisticLockException;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -44,14 +45,18 @@ public class CustomersController {
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public Response update(@PathParam("id") final Integer id, CustomerDto c) {
-        Customer existingCustomer = customersDAO.findOne(id);
-        if (existingCustomer == null)
-            return Response.status(Response.Status.NOT_FOUND).build();
-        existingCustomer.setEmail(c.getEmail());
-        existingCustomer.setName(c.getName());
-        existingCustomer.setAddress(c.getAddress());
-        customersDAO.update(existingCustomer);
-        return Response.ok().build();
+        try {
+            Customer existingCustomer = customersDAO.findOne(id);
+            if (existingCustomer == null)
+                return Response.status(Response.Status.NOT_FOUND).build();
+            existingCustomer.setEmail(c.getEmail());
+            existingCustomer.setName(c.getName());
+            existingCustomer.setAddress(c.getAddress());
+            customersDAO.update(existingCustomer);
+            return Response.ok().build();
+        } catch (OptimisticLockException e) {
+            return Response.status(Response.Status.CONFLICT).build();
+        }
     }
 
     @Path("/")

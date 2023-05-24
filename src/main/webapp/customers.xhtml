@@ -30,7 +30,7 @@
         <div>
             <p>
                 <h:link outcome="shoppingcart.xhtml?customerId=#{cart.customer.id}&amp;shoppingCartId=#{cart.id}">
-                    Order #{cart.number}. Number of products: #{shoppingCarts.shoppingCartProductCount(cart.id)}
+                    Order #{cart.number}. Number of products: #{shoppingCarts.shoppingCartProductCount(cart.id)}. Order number: #{cart.orderNumber}
                 </h:link>
             </p>
             <ul>
