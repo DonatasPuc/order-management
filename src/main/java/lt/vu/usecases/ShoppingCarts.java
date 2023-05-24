@@ -9,6 +9,7 @@ import lt.vu.mybatis.dao.ShoppingcartProductMapper;
 import lt.vu.persistence.CustomersDAO;
 import lt.vu.persistence.ProductsDAO;
 import lt.vu.persistence.ShoppingCartsDAO;
+import lt.vu.services.OrderNumberGenerator;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
@@ -21,6 +22,8 @@ import java.util.stream.Collectors;
 @Model
 public class ShoppingCarts {
 
+    @Inject
+    private OrderNumberGenerator orderNumberGenerator;
     @Inject
     private ShoppingcartProductMapper shoppingcartProductMapper;
 
@@ -60,6 +63,7 @@ public class ShoppingCarts {
         shoppingCartToCreate.setCustomer(customer);
         shoppingCartToCreate.setCreateDate(new Date());
         shoppingCartToCreate.setNumber(customerShoppingCartNumber());
+        shoppingCartToCreate.setOrderNumber(orderNumberGenerator.getOrderNumber());
 
         shoppingCartsDAO.persist(shoppingCartToCreate);
         return "/customers.xhtml?faces-redirect=true&customerId=" + customer.getId();

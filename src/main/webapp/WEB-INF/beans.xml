@@ -9,4 +9,10 @@
     <interceptors>
         <class>lt.vu.log.MethodLogger</class>
     </interceptors>
+    <alternatives>
+        <class>lt.vu.services.SequentialGenerator</class>
+    </alternatives>
+    <decorators>
+        <class>lt.vu.log.OrderNumberGeneratorLogger</class>
+    </decorators>
 </beans>

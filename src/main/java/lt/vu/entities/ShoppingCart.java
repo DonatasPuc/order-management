@@ -28,6 +28,7 @@ public class ShoppingCart implements Serializable {
     private Integer id;
 
     private Integer number;
+    private String orderNumber;
     private Date createDate;
 
     @ManyToOne

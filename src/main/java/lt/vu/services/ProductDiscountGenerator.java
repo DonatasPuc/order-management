@@ -9,14 +9,6 @@ import java.util.Random;
 @ApplicationScoped
 public class ProductDiscountGenerator implements Serializable {
 
-    public Integer calculateProductDiscount(Product product) {
-        try {
-            Thread.sleep(3000); // Simulate intensive work
-        } catch (InterruptedException e) {
-        }
-        return getLinearRandomNumber(50);
-    }
-
     private static int getLinearRandomNumber(int maxSize){
         //Get a linearly multiplied random number
         int randomMultiplier = maxSize * (maxSize + 1) / 2;
@@ -31,5 +23,13 @@ public class ProductDiscountGenerator implements Serializable {
         }
 
         return linearRandomNumber;
+    }
+
+    public Integer calculateProductDiscount(Product product) {
+        try {
+            Thread.sleep(3000); // Simulate intensive work
+        } catch (InterruptedException e) {
+        }
+        return getLinearRandomNumber(50);
     }
 }
